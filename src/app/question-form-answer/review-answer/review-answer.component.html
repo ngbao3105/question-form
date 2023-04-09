@@ -1,0 +1,20 @@
+<ng-container *ngFor="let data of dataSource">
+    <div class="review-item">
+        <h3 class="title">{{data.question}}</h3>
+        <div class="content">
+            <ng-container *ngIf="data.formType === typeQuestionFormEnum?.PARAGRAPH; else checkboxTemplate">
+                <span>{{data.answers}}</span>
+            </ng-container>
+            <ng-template #checkboxTemplate>
+                <ng-container *ngFor="let answer of data?.answers">
+                    <div *ngIf="answer !== 'Other'; else otherAnswerTemplate">
+                        {{answer}}
+                    </div>
+                    <ng-template #otherAnswerTemplate>
+                        {{data.otherValue}}
+                    </ng-template>
+                </ng-container>
+            </ng-template>
+        </div>
+    </div>
+</ng-container>
